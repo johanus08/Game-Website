@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Quintet</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="tictactoe.css">
+</head>
+<body>
+<div ng-app="app" ng-controller="TicTacToeCtrl">
+
+  <table id="scoreboard" align="center">
+    <tr>
+      <td> Player 1</td>
+      <td width="30"> &nbsp; </td>
+      <td> Player 2 </td>
+    </tr>
+    <tr>
+      <td class="score" id="player1"> 
+        {{game.scores.X}}
+      </td>
+      <td> &nbsp; </td>
+      <td class="score" id="player2">
+        {{game.scores.O}}
+      </td>
+    </tr>
+  </table>
+
+
+  <table align="center" id="tic-tac-toe">
+    <tr ng-repeat="(row_index, row) in game.dummyArray track by $index">
+      <td ng-repeat="(column_index, column) in game.dummyArray track by $index" 
+          ng-click="game.mark(row_index, column_index)"
+          class="{{game.data[row_index+''+column_index]}}">
+        {{game.data[row_index+''+column_index]}}
+      </td>
+    </tr>
+  </table>
+
+  <button ng-click="game.init()" style="padding: 16px 32px;text-align: center;border-radius: 17px;text-decoration: none; display: inline-block;border: none;transition-duration: 0.4s;cursor: pointer; font-size: 15px;">Reset</button>
+
+  <select ng-model="game.grid_size"
+          ng-options="option.value as option.label for option in grid_options"
+          ng-change="game.init()" style="height: 45px; width: 150px;justify-content: center; border-radius: 17px;align-items: center; padding-left: 40px; font-size: 20px; cursor: pointer;">
+  </select>
+<button class="btn btn-light" onclick="window.location.href='MultiPlayer.html'">Back</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src ="tictactoe.js"></script>
+</body>
+</html>

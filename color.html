@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quintet</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <script type="text/javascript" src="js/lib/angular/angular.js"></script>
+	<script type="text/javascript" src="js/puzzle/wordSearchPuzzle.js"></script>
+	<script type="text/javascript" src="js/color.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+</head>
+<body ng-app="puzzleApp" style="background-image:linear-gradient(to right, yellow, brown);">
+	<ul id="types">
+		<li ng-repeat="t in types" ng-class="{'selected': t.id == type}">
+			<a ng-href="#/{{t.id}}" style="color: red;">{{t.title}}</a>
+		</li>
+	</ul>
+
+	<div ng-include="type"></div>
+
+
+	<script type="text/ng-template" id="word-search-puzzle">
+		<div id="word-search" ng-controller="wordSearchCtrl">
+			<ul class="words">
+				<li ng-repeat="word in puzzle.words" ng-class="{'found': word.found}">
+					{{word.name}}
+				</li>
+			</ul>
+			<word-search-puzzle matrix="matrix" words="words" api="puzzle"></word-search-puzzle>
+			<div class="status">
+				<button ng-click="puzzle.solve()" ng-show="!puzzle.solved" class="solve" style="color:red; text-align:center; display: inline-block; padding: 5px 11px 5px; background-color:black;">solve</button>
+<button ng-click="puzzle.solve()" ng-show="!puzzle.solved" class="solve" type="button" onclick="document.location='levels.html'" style="color:red; text-align:center; display: inline-block; padding: 5px 11px 5px; background-color:black; margin:5px;">Back</button>				
+<strong ng-show="puzzle.solved" ng-show="puzzle.solved">Solved!
+<button type="button" onclick="document.location='color.html'" style="color:red; text-align:center; display: inline-block; padding: 5px 11px 5px; background-color:black; margin:5px;">Restart</button>
+<button type="button" onclick="document.location='levels.html'" style="color:red; text-align:center; display: inline-block; padding: 5px 11px 5px; background-color:black;">Back</button>
+				</strong>
+			</div>
+		</div>
+	</script>
+</body>
+</html>
